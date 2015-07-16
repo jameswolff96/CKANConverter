@@ -37,9 +37,23 @@ public class CKANConverter {
 	 */
 	public static void main(String[] args) {
 		scan = new Scanner(System.in);
-		if(args.length < 2 || args.length > 4) {
-			System.out.println("You must pass at least an import and export location (be sure to surround each with \"\")");
+		if(args.length > 3) {
+			System.out.println("You passed too many parameters, be sure to surround import and export locations with \"\")");
 			quit();
+		}
+		if(args.length < 2) {
+			args = new String [3];
+			System.out.println("Please provide the path to the .ckan file (without quotes): ");
+			args[0] = scan.nextLine();
+			System.out.println("Please provide the path to the .txt or .csv file (without quotes): ");
+			args[1] = scan.nextLine();
+			System.out.println("Is this going to be exported as a .csv Y/N: ");
+			String temp = scan.nextLine();
+			if(temp.toLowerCase().startsWith("y")) {
+				args[2] = "-c";
+			}else {
+				args[2] = "-t";
+			}
 		}
 		importLocation = args[0];
 		exportLocation = args[1];
